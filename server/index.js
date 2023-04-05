@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+import projectRoutes from './routes/projects.js';
+
 const app = express();
 dotenv.config();
 
@@ -19,6 +21,8 @@ const __dirname = dirname(__filename);
 app.get('/', (req, res) => {        
     res.sendFile('index.html', {root: __dirname});      
 });
+
+app.use('/projects', projectRoutes);
 
 const PORT = process.env.PORT || 3002;
 
