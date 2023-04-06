@@ -22,3 +22,11 @@ export const addProject = async (req,res) => {
         res.status(409).json({ message: error });
     }
 };
+
+export const deleteProject = async (req,res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).send("No project with that id!");
+    await Project.findByIdAndDelete(id);
+    res.json({ message: "Project deleted successfully." });
+};
