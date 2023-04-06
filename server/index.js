@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 import projectRoutes from './routes/projects.js';
+import userRoutes from './routes/users.js'
 
 const app = express();
 dotenv.config();
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/projects', projectRoutes);
+app.use('/users', userRoutes);
 
 const PORT = process.env.PORT || 3002;
 

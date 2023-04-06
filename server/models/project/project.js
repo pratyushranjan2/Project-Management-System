@@ -6,6 +6,7 @@ const projectSchema = mongoose.Schema(
         description: String,
         github: String,
         domain: [String],
+        members: [String],
         active: Boolean,
         candidatesInterested: {
             type: [String],
