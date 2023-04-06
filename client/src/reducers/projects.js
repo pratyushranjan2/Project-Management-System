@@ -16,11 +16,11 @@ const projects = (projects = [], action) => {
             return [...projects, action.payload];
 
         case UPDATE_PROJECT:
-            return projects.map((post) =>
-                post._id === action.payload._id ? action.payload : post
+            return projects.map((project) =>
+                project._id === action.payload._id ? action.payload : project
             );
         case DELETE_PROJECT:
-            return projects.filter((post) => post._id !== action.payload);
+            return projects.filter((project) => project._id !== action.payload);
         default:
             return projects;
     }
