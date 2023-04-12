@@ -72,10 +72,11 @@ const Projects = ({ setCurrentId }) => {
             <Masonry options={options}>
                 {projects.map((project) => (
                     <div key={project._id}>
-                        <Project
+                        {/* NEED TO SET THIS TO SEE THE PROJECTS */}
+                        {/* <Project
                             project={project}
                             setCurrentId={setCurrentId}
-                        />
+                        /> */}
                     </div>
                 ))}
             </Masonry>
