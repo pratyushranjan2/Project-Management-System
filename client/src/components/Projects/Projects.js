@@ -29,6 +29,9 @@ const Loading = () => (
 // Set the current id
 const Projects = ({ setCurrentId }) => {
     const projects = useSelector((state) => state.projects);
+    // const temp = useSelector((state) =>
+    //     console.log('Projects coming to frontend:', state.projects)
+    // );
 
     const { width } = useWindowDimensions();
 
@@ -72,11 +75,10 @@ const Projects = ({ setCurrentId }) => {
             <Masonry options={options}>
                 {projects.map((project) => (
                     <div key={project._id}>
-                        {/* NEED TO SET THIS TO SEE THE PROJECTS */}
-                        {/* <Project
+                        <Project
                             project={project}
                             setCurrentId={setCurrentId}
-                        /> */}
+                        />
                     </div>
                 ))}
             </Masonry>

@@ -15,16 +15,24 @@ const Project = ({ project, setCurrentId }) => {
 
     return (
         <div className="card w-full glass">
-            <figure>
+            {/* <figure>
                 <img src={project.selectedFile} alt={project._id} />
-            </figure>
+            </figure> */}
             <div className="card-body p-2 sm:p-3">
                 <p className="text-lg lg:text-xl card-title text-gray-700 dark:text-gray-100">
                     {project.title}
                 </p>
                 <div className="flex flex-row justify-between text-sm lg:text-base text-gray-500 font-medium dark:text-gray-400">
-                    <div>{project.name}</div>
-                    <div>{moment(project.createdAt).fromNow()}</div>
+                    <div>
+                        <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            {project.github}
+                        </a>
+                    </div>
+                    {/* <div>{moment(project.createdAt).fromNow()}</div> */}
                 </div>
                 {/* <div className=" text-xs lg:text-sm text-gray-500 font-medium dark:text-gray-400">
           <div>
@@ -34,15 +42,15 @@ const Project = ({ project, setCurrentId }) => {
           </div>
         </div> */}
                 <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
-                    {project.message}
+                    {project.description}
                 </p>
                 <div className="card-actions justify-end">
-                    {project.tags.map((tag) => (
+                    {project.domain.map((d) => (
                         <div
-                            key={tag}
+                            key={d}
                             className="badge badge-outline text-xs lg:text-sm"
                         >
-                            {tag}
+                            {d}
                         </div>
                     ))}
                 </div>
@@ -50,14 +58,11 @@ const Project = ({ project, setCurrentId }) => {
                     <div className="">
                         <button
                             className="btn btn-primary no-animation px-2 md:px-3"
-                            onClick={() => dispatch(applyProject(project._id))}
+                            onClick={() => {}}
                             disabled={!user?.result}
                         >
-                            {project.likes.find(
-                                (like) =>
-                                    like ===
-                                    (user?.result?.googleId ||
-                                        user?.result?._id)
+                            {project.candidatesInterested.find(
+                                (interested) => interested === user?.result?._id
                             ) ? (
                                 <RiThumbUpFill className="text-base md:text-lg" />
                             ) : (
@@ -65,13 +70,12 @@ const Project = ({ project, setCurrentId }) => {
                             )}
                             &nbsp;&nbsp;
                             <div className="text-sm md:text-base">
-                                {project.likes.length}
+                                {project.candidatesInterested.length}
                             </div>
                         </button>
                     </div>
 
-                    {(user?.result?.googleId === project?.creator ||
-                        user?.result?._id === project?.creator) && (
+                    {user?.result?._id === project?.creator && (
                         <div>
                             <button
                                 className="btn px-2 sm:px-3 mr-1 md:mr-2 no-animation"
@@ -81,8 +85,9 @@ const Project = ({ project, setCurrentId }) => {
                             </button>
                             <button
                                 className="btn btn-error px-2 sm:px-3 no-animation"
-                                onClick={() =>
-                                    dispatch(deleteProject(project._id))
+                                onClick={
+                                    () => {}
+                                    // dispatch(deleteProject(project._id))
                                 }
                             >
                                 <RiDeleteBin6Line className="text-base md:text-lg" />

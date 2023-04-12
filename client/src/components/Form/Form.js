@@ -10,9 +10,11 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const [projectData, setProjectData] = useState({
         title: '',
-        message: '',
-        tags: '',
-        selectedFile: '',
+        description: '',
+        github: '',
+        domain: '',
+        members: '',
+        active: false,
     });
 
     const dispatch = useDispatch();
@@ -31,98 +33,29 @@ const Form = ({ currentId, setCurrentId }) => {
         setCurrentId(null); //?
         setProjectData({
             title: '',
-            message: '',
-            tags: '',
-            selectedFile: '',
+            description: '',
+            github: '',
+            domain: '',
+            members: '',
+            active: false,
         });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(projectData);
-        // console.log("submitted");
+
         if (currentId) {
-            dispatch(
-                updateProject(currentId, {
-                    ...projectData,
-                    name: user?.result?.name,
-                })
-            );
+            dispatch();
+            // updateProject(currentId, {               //UPDATE PROJECT ROUTE IS ABSENT
+            //     ...projectData,
+            //     name: user?.result?.name,
+            // })
         } else {
-            dispatch(
-                createProject({ ...projectData, name: user?.result?.name })
-            );
+            dispatch(createProject({ ...projectData }));
         }
         setShowForm(false);
         clear();
     };
-
-    const resizeFile = (file) =>
-        new Promise((resolve) => {
-            Resizer.imageFileResizer(
-                file,
-                file.width,
-                file.width,
-                'JPEG',
-                30,
-                0,
-                (uri) => {
-                    resolve(uri);
-                },
-                'base64'
-            );
-        });
-
-    const onDrop = useCallback(
-        (acceptedFiles) => {
-            var file = acceptedFiles[0];
-            const preview = document.querySelector('#preview');
-            const reader = new FileReader();
-            reader.onload = async () => {
-                const image = await resizeFile(file);
-                // console.log(image);
-                setProjectData({ ...projectData, selectedFile: image });
-                if (file) {
-                    preview.src = image;
-                    preview.classList.remove('hidden');
-                }
-                // console.log(event.target.result);
-            };
-            // update reader to make preview work
-            if (file) {
-                reader.readAsDataURL(file);
-            }
-        },
-        [projectData]
-    );
-
-    // use this callback function to remove preview when the file dialog is opened (o/w users may think they uploaded the file since there is preview but actually no file is uploaded)
-    const onFileDialogOpen = useCallback((acceptedFiles) => {
-        var file = acceptedFiles;
-        const preview = document.querySelector('#preview');
-        if (!file) {
-            preview.classList.add('hidden');
-        }
-    }, []);
-
-    const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
-        useDropzone({
-            onDrop,
-            onFileDialogOpen,
-            accept: {
-                // "image/jpeg": [".jpeg"],
-                // "image/png": [".png"],
-                'image/jpg': ['.jpg', '.png', '.webp', '.jpeg'],
-            },
-            multiple: false,
-        });
-
-    const files = acceptedFiles.map((file) => (
-        <li key={file.path} className="break-words">
-            {/* {file.path} - {file.size} bytes */}
-            File Uploaded: <br /> ➡️ {file.path}
-        </li>
-    ));
 
     const inputStyle =
         'mt-1 block w-full rounded-md dark:text-gray-700 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50';
@@ -221,84 +154,89 @@ const Form = ({ currentId, setCurrentId }) => {
                                                 />
                                             </label>
                                             <label className="block mb-6">
-                                                <span>Message</span>
+                                                <span>Description</span>
                                                 <textarea
                                                     className={
                                                         inputStyle +
                                                         ' resize-none'
                                                     }
-                                                    value={projectData.message}
+                                                    value={
+                                                        projectData.description
+                                                    }
                                                     rows="3"
                                                     onChange={(e) =>
                                                         setProjectData({
                                                             ...projectData,
-                                                            message:
+                                                            description:
                                                                 e.target.value,
                                                         })
                                                     }
                                                 ></textarea>
                                             </label>
                                             <label className="block mb-6">
-                                                <span>
-                                                    Tags (Separate them using
-                                                    commas ',')
-                                                </span>
+                                                <span>GitHub Link</span>
                                                 <input
                                                     type="text"
                                                     className={inputStyle}
-                                                    value={projectData.tags}
-                                                    placeholder="tag1,tag2,tag3..."
+                                                    value={projectData.github}
                                                     onChange={(e) =>
                                                         setProjectData({
                                                             ...projectData,
-                                                            tags: e.target.value.split(
-                                                                ','
-                                                            ),
+                                                            github: e.target
+                                                                .value,
                                                         })
                                                     }
                                                 />
                                             </label>
                                             <label className="block mb-6">
                                                 <span>
-                                                    File Uploads (Only
-                                                    *.jpeg/jpg/png images
-                                                    accepted)
+                                                    Domains(Separate them using
+                                                    commas ',')
                                                 </span>
-                                                <span className="sr-only">
-                                                    Choose profile photo
-                                                </span>
-                                                <div
-                                                    {...getRootProps({
-                                                        className:
-                                                            fileInputStyle,
-                                                    })}
-                                                >
-                                                    <input
-                                                        {...getInputProps()}
-                                                    />
-                                                    {isDragActive ? (
-                                                        <p>
-                                                            Drop the file here
-                                                            ...
-                                                        </p>
-                                                    ) : (
-                                                        <p>
-                                                            Drag 'n' drop the
-                                                            file here, or click
-                                                            to select file
-                                                        </p>
-                                                    )}
-                                                </div>
-                                                <aside className="mt-2">
-                                                    <ul>{files}</ul>
-                                                    <img
-                                                        src=""
-                                                        id="preview"
-                                                        alt="preview"
-                                                        className="hidden"
-                                                    />
-                                                </aside>
+                                                <input
+                                                    type="text"
+                                                    className={inputStyle}
+                                                    value={projectData.domain}
+                                                    placeholder="domain 1, domain 2, domain 3..."
+                                                    onChange={(e) =>
+                                                        setProjectData({
+                                                            ...projectData,
+                                                            domain: e.target.value.split(
+                                                                ','
+                                                            ),
+                                                        })
+                                                    }
+                                                />
                                             </label>
+
+                                            <div className="relative flex flex-col items-left justify-left block mb-6">
+                                                <div className="flex">
+                                                    <label className="inline-flex relative items-center mr-5 cursor-pointer">
+                                                        <input
+                                                            type="checkbox"
+                                                            className="sr-only peer"
+                                                            checked={
+                                                                projectData.active
+                                                            }
+                                                            readOnly
+                                                        />
+                                                        <div
+                                                            onClick={(e) => {
+                                                                setProjectData({
+                                                                    ...projectData,
+                                                                    active: !projectData.active,
+                                                                });
+                                                            }}
+                                                            className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-blue-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                                                        ></div>
+                                                        <span className="ml-2 text-sm font-medium text-gray-900">
+                                                            Active Project or
+                                                            not?
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
                                             <label className="block mb-2">
                                                 <span className="sr-only">
                                                     Submit Button

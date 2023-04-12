@@ -10,8 +10,6 @@ import {
 export const getProjects = () => async (dispatch) => {
     try {
         const { data } = await api.fetchProjects();
-        // payload is where we store all our projects
-        // thunk allows us to specify additional arrow function
         dispatch({ type: FETCH_ALL, payload: data });
     } catch (error) {
         console.log(error);
