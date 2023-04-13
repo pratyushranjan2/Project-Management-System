@@ -75,7 +75,7 @@ export const updateProject = async (req, res) => {
     if (index === -1) {
       project.candidatesInterested.push(user.email);
     } else {
-      project.candidatesInterested = project.candidatesInterested.filter((email) => email !== String(req.email));
+      project.candidatesInterested = project.candidatesInterested.filter((email) => email !== String(user.email));
     }
   
     const updatedProject = await Project.findByIdAndUpdate(
