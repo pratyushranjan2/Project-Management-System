@@ -21,8 +21,6 @@ export const getProjectsBySearch = (searchQuery) => async (dispatch) => {
             data: { data },
         } = await api.fetchProjectsBySearch(searchQuery);
         dispatch({ type: FETCH_BY_SEARCH, payload: data });
-
-        console.log(data);
     } catch (error) {
         console.log(error);
     }
