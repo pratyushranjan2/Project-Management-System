@@ -58,16 +58,15 @@ const Project = ({ project, setCurrentId }) => {
                     <div className="">
                         <button
                             className="btn btn-primary no-animation px-2 md:px-3"
-                            onClick={() => {}}
+                            onClick={() => {}} //Dispatch Interested action here.
                             disabled={!user?.result}
                         >
                             {project.candidatesInterested.find(
-                                (interested) => interested === user?.result?._id
-                            ) ? (
-                                <RiThumbUpFill className="text-base md:text-lg" />
-                            ) : (
-                                <RiThumbUpLine className="text-base md:text-lg" />
-                            )}
+                                (interested) =>
+                                    interested === user?.result?.email
+                            )
+                                ? 'Applied'
+                                : 'Apply'}
                             &nbsp;&nbsp;
                             <div className="text-sm md:text-base">
                                 {project.candidatesInterested.length}
