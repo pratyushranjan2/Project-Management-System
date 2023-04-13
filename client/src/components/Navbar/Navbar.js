@@ -82,25 +82,43 @@ export default function Navbar({ search, setSearch, handleSearchSubmit }) {
                                             alt="ProjectShare"
                                         />
                                     </a>
+                                    <a href="/">
+                                        <img
+                                            className="hidden lg:block h-10 w-auto"
+                                            src={logo}
+                                            alt="ProjectShare"
+                                        />
+                                    </a>
+                                    <a href="/">
+                                        <img
+                                            className="hidden lg:block h-10 w-auto"
+                                            src={logo}
+                                            alt="ProjectShare"
+                                        />
+                                    </a>
                                 </div>
                                 {/* <div className="hidden sm:flex items-center sm:ml-6">
-                  <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <button
-                        key={item.name}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </button>
-                    ))}
-                  </div>
-                </div> */}
+                                    <div className="flex space-x-4">
+                                        {navigation.map((item) => (
+                                            <button
+                                                key={item.name}
+                                                className={classNames(
+                                                    item.current
+                                                        ? 'bg-gray-900 text-white'
+                                                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                    'px-3 py-2 rounded-md text-sm font-medium'
+                                                )}
+                                                aria-current={
+                                                    item.current
+                                                        ? 'page'
+                                                        : undefined
+                                                }
+                                            >
+                                                {item.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div> */}
                             </div>
                             {user && (
                                 <SearchBar

@@ -12,8 +12,8 @@ module.exports = {
             8: '8px',
         },
         backgroundImage: {
-            'light-mode': 'url(./subtle-prism.svg)',
             'dark-mode': 'url(./endless-constellation.svg)',
+            // 'light-mode': 'url(./subtle-prism.svg)',
         },
     },
     plugins: [require('@tailwindcss/forms'), require('daisyui')],
