@@ -15,8 +15,12 @@ export const getProjects = async (req,res) => {
 export const addProject = async (req,res) => {
     try {
         const project = req.body;
+
+        project.domain = [...new Set(project.domain)];
+        
         const newProject = new Project({ ...project, creator: req.userId });
         newProject.creator = req.userId;
+        
         await newProject.save();
         res.status(201).json(newProject);
     }
