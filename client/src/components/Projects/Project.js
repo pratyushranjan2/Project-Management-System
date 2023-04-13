@@ -45,10 +45,32 @@ const Project = ({ project, setCurrentId }) => {
                     {project.description}
                 </p>
                 {project.creator === user?.result?._id && (
-                    <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
-                        <b>Candidates Interested:</b>
-                        {project.candidatesInterested.map((i) => i)}
-                    </p>
+                    <div>
+                        <br></br>
+                        <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
+                            <b>Candidates Interested:</b>
+                            <br></br>
+                            {project.candidatesInterested.map((i) => (
+                                <div>
+                                    &ensp;&ensp;&ensp;
+                                    {i}
+                                    <br></br>
+                                </div>
+                            ))}
+                        </p>
+                        <br></br>
+                        <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
+                            <b>Candidates Working:</b>
+                            <br></br>
+                            {project.members.map((member) => (
+                                <div>
+                                    &ensp;&ensp;&ensp;
+                                    {member}
+                                    <br></br>
+                                </div>
+                            ))}
+                        </p>
+                    </div>
                 )}
                 <div className="card-actions justify-end">
                     {project.domain.map((d) => (
