@@ -1,4 +1,5 @@
 import Project from "../models/project/project.js";
+import User from "../models/user/user.js";
 import mongoose from "mongoose";
 
 export const getProjects = async (req,res) => {
@@ -15,7 +16,7 @@ export const addProject = async (req,res) => {
     try {
         const project = req.body;
         const newProject = new Project({ ...project, creator: req.userId });
-        newProject.creator = req.userId
+        newProject.creator = req.userId;
         await newProject.save();
         res.status(201).json(newProject);
     }
@@ -69,10 +70,12 @@ export const updateProject = async (req, res) => {
   
     const index = project.candidatesInterested.findIndex((id) => id === String(req.userId));
   
+    const user = await User.findById(req.userId);
+    
     if (index === -1) {
-      project.candidatesInterested.push(req.userId);
+      project.candidatesInterested.push(user.email);
     } else {
-      project.candidatesInterested = project.candidatesInterested.filter((id) => id !== String(req.userId));
+      project.candidatesInterested = project.candidatesInterested.filter((email) => email !== String(req.email));
     }
   
     const updatedProject = await Project.findByIdAndUpdate(
