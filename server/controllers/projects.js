@@ -85,3 +85,29 @@ export const updateProject = async (req, res) => {
     );
     res.json(updatedProject);
   };
+
+  export const selectCandidate = async (req, res) => {
+    const { candidateEmail, projectId } = req.query;
+
+    if (!mongoose.Types.ObjectId.isValid(projectId))
+      return res.status(404).send("No project with that id!");
+    
+    const project = await Project.findById(projectId);
+    
+    const index = project.candidatesInterested
+                  .findIndex((email) => email === String(candidateEmail));
+    
+    if (index !== -1) {
+      project.candidatesInterested = project.candidatesInterested
+                                    .filter((email) => email !== String(candidateEmail));
+      const isPresentAlready = project.members
+                              .findIndex((email) => email === candidateEmail);
+      
+      if (isPresentAlready === -1) {
+        project.members.push(candidateEmail);
+      }
+    }
+    
+    const updatedProject = await Project.findByIdAndUpdate(projectId, project, { new: true });
+    res.json(updatedProject);
+  };
