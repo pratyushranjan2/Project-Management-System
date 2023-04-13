@@ -10,6 +10,7 @@ import {
 const Project = ({ project, setCurrentId }) => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const [p, setP] = useState(project);
     const [form, setForm] = useState(project);
 
     const handleAdd = (candidate) => {
@@ -53,38 +54,36 @@ const Project = ({ project, setCurrentId }) => {
                             <b>Candidates Interested:{'\n'}</b>
 
                             {project.candidatesInterested.map((i) => (
-                                <div>
+                                <form onSubmit={handleAdd({ i })}>
                                     &ensp;&ensp;&ensp;
                                     {i}
                                     &ensp;{' '}
                                     <button
                                         type="button"
                                         className="btn btn-green px-2 sm:px-6 min-h-0 h-6 mb-1"
-                                        onClick={handleAdd({ i })}
                                     >
                                         Select
                                     </button>
                                     {'\n'}
-                                </div>
+                                </form>
                             ))}
 
                             <br />
 
                             <b>Candidates Working:{'\n'}</b>
                             {project.members.map((i) => (
-                                <div>
+                                <form onSubmit={handleRemove({ i })}>
                                     &ensp;&ensp;&ensp;
                                     {i}
                                     &ensp;{' '}
                                     <button
                                         type="button"
                                         className="btn btn-green px-2 sm:px-6 min-h-0 h-6 mb-1"
-                                        onClick={handleRemove({ i })}
                                     >
                                         Remove
                                     </button>
                                     {'\n'}
-                                </div>
+                                </form>
                             ))}
 
                             <br />
