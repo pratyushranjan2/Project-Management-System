@@ -71,6 +71,9 @@ export const updateProject = async (req, res) => {
     const user = await User.findById(req.userId);
   
     const index = project.candidatesInterested.findIndex((email) => email === String(user.email));
+    const alreadyMember = project.members.findIndex((email) => email === String(user.email));
+
+    if (alreadyMember !== -1) return res.json({ "message": "Already a member" });
     
     if (index === -1) {
       project.candidatesInterested.push(user.email);
