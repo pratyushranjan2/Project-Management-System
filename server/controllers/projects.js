@@ -15,6 +15,7 @@ export const addProject = async (req,res) => {
     try {
         const project = req.body;
         const newProject = new Project({ ...project, creator: req.userId });
+        newProject.creator = req.userId
         await newProject.save();
         res.status(201).json(newProject);
     }

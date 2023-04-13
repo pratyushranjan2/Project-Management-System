@@ -11,7 +11,8 @@ const projectSchema = mongoose.Schema(
         candidatesInterested: {
             type: [String],
             default: []
-        }
+        },
+        creator: String,
     },
     { timestampes: true }
 );
