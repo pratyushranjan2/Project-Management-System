@@ -85,10 +85,9 @@ const Project = ({ project, setCurrentId }) => {
                             </button>
                             <button
                                 className="btn btn-error px-2 sm:px-3 no-animation"
-                                onClick={
-                                    () => {}
-                                    // dispatch(deleteProject(project._id))
-                                }
+                                onClick={() => {
+                                    dispatch(deleteProject(project._id));
+                                }}
                             >
                                 <RiDeleteBin6Line className="text-base md:text-lg" />
                             </button>
