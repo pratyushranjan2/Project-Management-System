@@ -52,3 +52,11 @@ export const signin = async (req, res) => {
       res.status(500).json({ message: "Something went wrong." });
     }
   };
+
+  export const updateUser = async (req, res) => {
+    const userId = req.userId;
+    const updates = req.body;
+    const updatedUser = await User.findByIdAndUpdate(userId, updates, 
+      { new: true });
+    res.json(updatedUser);
+  };
