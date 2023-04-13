@@ -44,6 +44,12 @@ const Project = ({ project, setCurrentId }) => {
                 <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
                     {project.description}
                 </p>
+                {project.creator === user?.result?._id && (
+                    <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
+                        <b>Candidates Interested:</b>
+                        {project.candidatesInterested.map((i) => i)}
+                    </p>
+                )}
                 <div className="card-actions justify-end">
                     {project.domain.map((d) => (
                         <div
@@ -56,22 +62,26 @@ const Project = ({ project, setCurrentId }) => {
                 </div>
                 <div className="card-actions flex flex-row justify-between mt-2">
                     <div className="">
-                        <button
-                            className="btn btn-primary no-animation px-2 md:px-3"
-                            onClick={() => {}} //Dispatch Interested action here.
-                            disabled={!user?.result}
-                        >
-                            {project.candidatesInterested.find(
-                                (interested) =>
-                                    interested === user?.result?.email
-                            )
-                                ? 'Applied'
-                                : 'Apply'}
-                            &nbsp;&nbsp;
-                            <div className="text-sm md:text-base">
-                                {project.candidatesInterested.length}
-                            </div>
-                        </button>
+                        {user?.result._id !== project.creator && (
+                            <button
+                                className="btn btn-primary no-animation px-2 md:px-3"
+                                onClick={() => {
+                                    dispatch(applyProject(project._id));
+                                }} //Dispatch Interested action here.
+                                disabled={!user?.result}
+                            >
+                                {project.candidatesInterested.find(
+                                    (interested) =>
+                                        interested === user?.result?.email
+                                )
+                                    ? 'Applied'
+                                    : 'Apply'}
+                                &nbsp;&nbsp;
+                                <div className="text-sm md:text-base">
+                                    {project.candidatesInterested.length}
+                                </div>
+                            </button>
+                        )}
                     </div>
 
                     {user?.result?._id === project?.creator && (
