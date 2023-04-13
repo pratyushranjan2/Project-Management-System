@@ -67,10 +67,10 @@ export const updateProject = async (req, res) => {
       return res.status(404).send("No project with that id!");
   
     const project = await Project.findById(id);
-  
-    const index = project.candidatesInterested.findIndex((id) => id === String(req.userId));
-  
+
     const user = await User.findById(req.userId);
+  
+    const index = project.candidatesInterested.findIndex((email) => email === String(user.email));
     
     if (index === -1) {
       project.candidatesInterested.push(user.email);
