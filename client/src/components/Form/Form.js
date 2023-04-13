@@ -45,11 +45,12 @@ const Form = ({ currentId, setCurrentId }) => {
         e.preventDefault();
 
         if (currentId) {
-            dispatch();
-            // updateProject(currentId, {               //UPDATE PROJECT ROUTE IS ABSENT
-            //     ...projectData,
-            //     name: user?.result?.name,
-            // })
+            dispatch(
+                updateProject(currentId, {
+                    ...projectData,
+                    name: user?.result?.name,
+                })
+            );
         } else {
             dispatch(createProject({ ...projectData }));
         }
@@ -140,9 +141,13 @@ const Form = ({ currentId, setCurrentId }) => {
                                         >
                                             <label className="block mb-6">
                                                 <span>Title</span>
-                                                <input
+                                                <textarea
+                                                    className={
+                                                        inputStyle +
+                                                        ' resize-none'
+                                                    }
                                                     type="text"
-                                                    className={inputStyle}
+                                                    rows="1"
                                                     value={projectData.title}
                                                     onChange={(e) =>
                                                         setProjectData({
@@ -175,9 +180,13 @@ const Form = ({ currentId, setCurrentId }) => {
                                             </label>
                                             <label className="block mb-6">
                                                 <span>GitHub Link</span>
-                                                <input
+                                                <textarea
+                                                    className={
+                                                        inputStyle +
+                                                        ' resize-none'
+                                                    }
                                                     type="text"
-                                                    className={inputStyle}
+                                                    rows="1"
                                                     value={projectData.github}
                                                     onChange={(e) =>
                                                         setProjectData({
@@ -193,9 +202,13 @@ const Form = ({ currentId, setCurrentId }) => {
                                                     Domains(Separate them using
                                                     commas ',')
                                                 </span>
-                                                <input
+                                                <textarea
+                                                    className={
+                                                        inputStyle +
+                                                        ' resize-none'
+                                                    }
                                                     type="text"
-                                                    className={inputStyle}
+                                                    rows="1"
                                                     value={projectData.domain}
                                                     placeholder="domain 1, domain 2, domain 3..."
                                                     onChange={(e) =>
