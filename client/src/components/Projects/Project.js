@@ -1,17 +1,26 @@
-import React from 'react';
-import {
-    RiThumbUpFill,
-    RiThumbUpLine,
-    RiDeleteBin6Line,
-    RiEdit2Line,
-} from 'react-icons/ri';
+import React, { useState } from 'react';
+import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { deleteProject, applyProject } from '../../actions/projects';
-import moment from 'moment';
+import {
+    deleteProject,
+    applyProject,
+    updateProject,
+} from '../../actions/projects';
 
 const Project = ({ project, setCurrentId }) => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const [form, setForm] = useState(project);
+
+    const handleAdd = (candidate) => {
+        console.log(candidate);
+        dispatch(updateProject(project._id, form));
+    };
+
+    const handleRemove = (candidate) => {
+        console.log(candidate);
+        dispatch(updateProject(project._id, form));
+    };
 
     return (
         <div className="card w-full glass">
@@ -32,43 +41,53 @@ const Project = ({ project, setCurrentId }) => {
                             {project.github}
                         </a>
                     </div>
-                    {/* <div>{moment(project.createdAt).fromNow()}</div> */}
                 </div>
-                {/* <div className=" text-xs lg:text-sm text-gray-500 font-medium dark:text-gray-400">
-          <div>
-            {project.createdAt === project.updatedAt
-              ? ""
-              : "(Edited " + moment(project.updatedAt).fromNow() + ")"}
-          </div>
-        </div> */}
+
                 <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
                     {project.description}
                 </p>
                 {project.creator === user?.result?._id && (
                     <div>
-                        <br></br>
+                        <br />
                         <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
-                            <b>Candidates Interested:</b>
-                            <br></br>
+                            <b>Candidates Interested:{'\n'}</b>
+
                             {project.candidatesInterested.map((i) => (
                                 <div>
                                     &ensp;&ensp;&ensp;
                                     {i}
-                                    <br></br>
+                                    &ensp;{' '}
+                                    <button
+                                        type="button"
+                                        className="btn btn-green px-2 sm:px-6 min-h-0 h-6 mb-1"
+                                        onClick={handleAdd({ i })}
+                                    >
+                                        Select
+                                    </button>
+                                    {'\n'}
                                 </div>
                             ))}
-                        </p>
-                        <br></br>
-                        <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
-                            <b>Candidates Working:</b>
-                            <br></br>
-                            {project.members.map((member) => (
+
+                            <br />
+
+                            <b>Candidates Working:{'\n'}</b>
+                            {project.members.map((i) => (
                                 <div>
                                     &ensp;&ensp;&ensp;
-                                    {member}
-                                    <br></br>
+                                    {i}
+                                    &ensp;{' '}
+                                    <button
+                                        type="button"
+                                        className="btn btn-green px-2 sm:px-6 min-h-0 h-6 mb-1"
+                                        onClick={handleRemove({ i })}
+                                    >
+                                        Remove
+                                    </button>
+                                    {'\n'}
                                 </div>
                             ))}
+
+                            <br />
                         </p>
                     </div>
                 )}

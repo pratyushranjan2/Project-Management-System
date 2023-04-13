@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { gapi } from 'gapi-script';
 import { useDispatch } from 'react-redux';
-import { AUTH } from '../../../constants/actionTypes';
 import { signin } from '../../../actions/auth';
 
 export default function SignIn({ setShowForm, setFormType }) {
@@ -16,33 +13,7 @@ export default function SignIn({ setShowForm, setFormType }) {
         dispatch(signin(formData));
     };
 
-    // const googleSuccess = async (res) => {
-    //     // console.log(res);
-    //     // const result = res.profileObj // if res is not undefined => cannot get property profileObj of undefined
-    //     const result = res?.profileObj; // OK
-    //     const token = res?.tokenId;
-
-    //     try {
-    //         dispatch({ type: AUTH, data: { result, token } });
-    //         window.location.reload();
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    // const googleFailure = () =>
-    //     console.log('Google Sign In was unsuccessful. Try Again Later');
-
-    useEffect(() => {
-        // function start() {
-        //     gapi.client.init({
-        //         clientId:
-        //             '252422663262-6k1s6rua8o3q3mhplasfvlc7ttsmf2qh.apps.googleusercontent.com',
-        //         scope: 'email',
-        //     });
-        // }
-        // gapi.load('client:auth2', start);
-    }, []);
+    useEffect(() => {}, []);
 
     return (
         <>

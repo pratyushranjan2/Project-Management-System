@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import Project from './Project';
 // eslint-disable-next-line no-unused-vars
-import { Masonry, Masonro } from './Masonry/Masonry';
+import { Masonry } from './Masonry/Masonry';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const Loading = () => (

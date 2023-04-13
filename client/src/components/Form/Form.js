@@ -1,8 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProject, updateProject } from '../../actions/projects';
-import { useDropzone } from 'react-dropzone';
-import Resizer from 'react-image-file-resizer';
 
 // Get the current id
 const Form = ({ currentId, setCurrentId }) => {
@@ -61,9 +59,6 @@ const Form = ({ currentId, setCurrentId }) => {
     const inputStyle =
         'mt-1 block w-full rounded-md dark:text-gray-700 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50';
 
-    const fileInputStyle =
-        'mt-1 block w-full text-base text-gray-700 bg-gray-100 dark:bg-gray-200 rounded-md cursor-pointer shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border-2 border-gray-300 dark:border-gray-400 dark:border-3 border-dashed rounded-lg px-3 py-5';
-
     if (!user?.result?.name) {
         return (
             <div>
@@ -106,7 +101,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     >
                         <div className="relative p-4 w-full max-w-md h-full md:h-auto mx-auto">
                             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                <button
+                                {/* <button
                                     type="button"
                                     className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                                     onClick={() => {
@@ -126,8 +121,8 @@ const Form = ({ currentId, setCurrentId }) => {
                                             clipRule="evenodd"
                                         ></path>
                                     </svg>
-                                </button>
-                                <div className="py-6 px-6 lg:px-8">
+                                </button> */}
+                                <div className="py-6 px-6 lg:px-4">
                                     <div className="text-2xl font-bold">
                                         {currentId ? 'Editing' : 'Creating'} a
                                         Project
