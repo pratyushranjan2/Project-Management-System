@@ -36,6 +36,4 @@ await mongoose
   )
   .catch((error) => console.log(error));
 
-mongoose.set('bufferTimeoutMS', process.env.MONGOOSE_BUFFER_TIMEOUT);
-
 export default app;
