@@ -20,7 +20,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.get('/', (req, res) => {        
-    res.sendFile('index.html', {root: __dirname});      
+    //res.sendFile('index.html', {root: __dirname});     
+    res.status(200).send({message: "Welcome to Project Management System"}); 
 });
 
 app.use('/projects', projectRoutes);
@@ -28,9 +29,13 @@ app.use('/users', userRoutes);
 
 const PORT = process.env.PORT || 3002;
 
-mongoose
+await mongoose
   .connect(process.env.CONNECTION_URL)
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
   )
   .catch((error) => console.log(error));
+
+mongoose.set('bufferTimeoutMS', process.env.MONGOOSE_BUFFER_TIMEOUT);
+
+export default app;
