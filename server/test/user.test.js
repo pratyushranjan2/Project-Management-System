@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'test';
 
 import mongoose from 'mongoose';
 import chai from 'chai';
-import Project from '../models/project/project.js';
+import User from '../models/user/user.js';
 const expect = chai.expect;
 const should = chai.should();
 import chaiHttp from 'chai-http';
@@ -21,14 +21,18 @@ after((done) => {
 });
 
 
-describe('Project API Tests', () => {
+describe('User API Tests', () => {
 
-    it('Get projects test', (done) => {
+    it('Signin user', (done) => {
         chai.request(app)
-        .get('/projects')
+        .post('/users/signin')
+        .send({
+            'email': process.env.TEST_USER_EMAIL,
+            'password': process.env.TEST_USER_PASSWORD
+        })
         .end((err, res) => {
             res.should.have.status(200);
-            res.body.should.be.a('array');
+            if (err) console.log('Unable to login test user: ', err);
             done();
         });
     });
