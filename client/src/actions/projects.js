@@ -5,6 +5,8 @@ import {
     CREATE_PROJECT,
     UPDATE_PROJECT,
     DELETE_PROJECT,
+    SET_CANDIDATE,
+    REMOVE_CANDIDATE,
 } from '../constants/actionTypes';
 
 export const getProjects = () => async (dispatch) => {
@@ -37,7 +39,7 @@ export const createProject = (project) => async (dispatch) => {
 
 export const updateProject = (id, project) => async (dispatch) => {
     try {
-        // response data = response.data
+        console.log(project);
         const { data } = await api.updateProject(id, project);
         dispatch({ type: UPDATE_PROJECT, payload: data });
     } catch (error) {

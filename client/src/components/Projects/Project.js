@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import {
@@ -10,18 +10,17 @@ import {
 const Project = ({ project, setCurrentId }) => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
-    const [p, setP] = useState(project);
     const [form, setForm] = useState(project);
+    const [addForm, setAddForm] = useState('');
+    const [removeForm, setRemoveForm] = useState('');
 
-    const handleAdd = (candidate) => {
-        console.log(candidate);
-        dispatch(updateProject(project._id, form));
-    };
+    useEffect(() => {
+        dispatch(updateProject(project._id, addForm));
+    }, [addForm, dispatch]);
 
-    const handleRemove = (candidate) => {
-        console.log(candidate);
-        dispatch(updateProject(project._id, form));
-    };
+    const handleAdd = async (candidate) => {};
+
+    const handleRemove = (candidate) => {};
 
     return (
         <div className="card w-full glass">
@@ -50,15 +49,16 @@ const Project = ({ project, setCurrentId }) => {
                 {project.creator === user?.result?._id && (
                     <div>
                         <br />
-                        <p className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
+                        <div className="text-gray-700 dark:text-gray-100 hidden md:block text-sm lg:text-base">
                             <b>Candidates Interested:{'\n'}</b>
 
                             {project.candidatesInterested.map((i) => (
-                                <form onSubmit={handleAdd({ i })}>
+                                <form>
                                     &ensp;&ensp;&ensp;
                                     {i}
                                     &ensp;{' '}
                                     <button
+                                        onClick={(e) => handleAdd({ i })}
                                         type="button"
                                         className="btn btn-green px-2 sm:px-6 min-h-0 h-6 mb-1"
                                     >
@@ -72,11 +72,12 @@ const Project = ({ project, setCurrentId }) => {
 
                             <b>Candidates Working:{'\n'}</b>
                             {project.members.map((i) => (
-                                <form onSubmit={handleRemove({ i })}>
+                                <form>
                                     &ensp;&ensp;&ensp;
                                     {i}
                                     &ensp;{' '}
                                     <button
+                                        onClick={(e) => handleRemove({ i })}
                                         type="button"
                                         className="btn btn-green px-2 sm:px-6 min-h-0 h-6 mb-1"
                                     >
@@ -87,7 +88,7 @@ const Project = ({ project, setCurrentId }) => {
                             ))}
 
                             <br />
-                        </p>
+                        </div>
                     </div>
                 )}
                 <div className="card-actions justify-end">

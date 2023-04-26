@@ -76,6 +76,7 @@ const Projects = ({ setCurrentId }) => {
                 {projects.map((project) => (
                     <div key={project._id}>
                         <Project
+                            key={project._id}
                             project={project}
                             setCurrentId={setCurrentId}
                         />

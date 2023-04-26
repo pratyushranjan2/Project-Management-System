@@ -19,6 +19,14 @@ export const updateProject = (id, updatedProject) =>
     API.patch(`/projects/${id}`, updatedProject);
 export const deleteProject = (id) => API.delete(`/projects/${id}`);
 export const applyProject = (id) => API.patch(`/projects/${id}/apply`);
+export const selectCandidate = (candidateEmail, projectId) =>
+    API.patch(
+        `/projects/selectCandidate?candidateEmail=${candidateEmail}&projectId=${projectId}`
+    );
+export const removeCandidate = (candidateEmail, projectId) =>
+    API.patch(
+        `/projects/removeMember?candidateEmail=${candidateEmail}&projectId=${projectId}`
+    );
 
 export const signIn = (formData) => API.post('/users/signin', formData);
 export const signUp = (formData) => API.post('/users/signup', formData);
