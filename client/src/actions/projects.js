@@ -66,3 +66,29 @@ export const applyProject = (id) => async (dispatch) => {
         console.log(error);
     }
 };
+
+export const selectCandidate =
+    (candidateEmail, projectId) => async (dispatch) => {
+        try {
+            const { data } = await api.selectCandidate(
+                candidateEmail,
+                projectId
+            );
+            dispatch({ type: SET_CANDIDATE, payload: data });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+export const removeCandidate =
+    (candidateEmail, projectId) => async (dispatch) => {
+        try {
+            const { data } = await api.removeCandidate(
+                candidateEmail,
+                projectId
+            );
+            dispatch({ type: REMOVE_CANDIDATE, payload: data });
+        } catch (error) {
+            console.log(error);
+        }
+    };

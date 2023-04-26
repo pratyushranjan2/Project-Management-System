@@ -4,6 +4,8 @@ import {
     CREATE_PROJECT,
     UPDATE_PROJECT,
     DELETE_PROJECT,
+    SET_CANDIDATE,
+    REMOVE_CANDIDATE,
 } from '../constants/actionTypes';
 
 const projects = (projects = [], action) => {
@@ -21,6 +23,14 @@ const projects = (projects = [], action) => {
             );
         case DELETE_PROJECT:
             return projects.filter((project) => project._id !== action.payload);
+        case SET_CANDIDATE:
+            return projects.map((project) =>
+                project._id === action.payload._id ? action.payload : project
+            );
+        case REMOVE_CANDIDATE:
+            return projects.map((project) =>
+                project._id === action.payload._id ? action.payload : project
+            );
         default:
             return projects;
     }

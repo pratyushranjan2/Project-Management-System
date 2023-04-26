@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import {
     deleteProject,
     applyProject,
-    updateProject,
+    selectCandidate,
+    removeCandidate,
 } from '../../actions/projects';
 
 const Project = ({ project, setCurrentId }) => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
-    const [form, setForm] = useState(project);
-    const [addForm, setAddForm] = useState('');
-    const [removeForm, setRemoveForm] = useState('');
 
-    useEffect(() => {
-        dispatch(updateProject(project._id, addForm));
-    }, [addForm, dispatch]);
+    const handleAdd = async (candidate) => {
+        dispatch(selectCandidate(candidate.i, project._id));
+    };
 
-    const handleAdd = async (candidate) => {};
-
-    const handleRemove = (candidate) => {};
+    const handleRemove = (candidate) => {
+        dispatch(removeCandidate(candidate.i, project._id));
+    };
 
     return (
         <div className="card w-full glass">
@@ -111,16 +109,35 @@ const Project = ({ project, setCurrentId }) => {
                                 }} //Dispatch Interested action here.
                                 disabled={!user?.result}
                             >
-                                {project.candidatesInterested.find(
-                                    (interested) =>
-                                        interested === user?.result?.email
-                                )
-                                    ? 'Applied'
-                                    : 'Apply'}
-                                &nbsp;&nbsp;
-                                <div className="text-sm md:text-base">
-                                    {project.candidatesInterested.length}
-                                </div>
+                                {project.members.find(
+                                    (member) => member === user?.result?.email
+                                ) ? (
+                                    'Working'
+                                ) : '' ||
+                                  project.candidatesInterested.find(
+                                      (interested) =>
+                                          interested === user?.result?.email
+                                  ) ? (
+                                    <div>
+                                        Applied&nbsp;&nbsp;
+                                        <div className="text-sm md:text-base">
+                                            {
+                                                project.candidatesInterested
+                                                    .length
+                                            }
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        Apply&nbsp;&nbsp;
+                                        <div className="text-sm md:text-base">
+                                            {
+                                                project.candidatesInterested
+                                                    .length
+                                            }
+                                        </div>
+                                    </div>
+                                )}
                             </button>
                         )}
                     </div>
