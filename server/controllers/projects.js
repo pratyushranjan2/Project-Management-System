@@ -118,3 +118,23 @@ export const updateProject = async (req, res) => {
     const updatedProject = await Project.findByIdAndUpdate(projectId, project, { new: true });
     res.json(updatedProject);
   };
+
+  export const removeMember = async (req, res) => {
+    const { candidateEmail, projectId } = req.query;
+
+    if (!mongoose.Types.ObjectId.isValid(projectId))
+      return res.status(404).send("No project with that id!");
+    
+    const project = await Project.findById(projectId);
+    
+    const index = project.members
+                  .findIndex((email) => email === String(candidateEmail));
+    
+    if (index !== -1) {
+      project.members = project.members
+                                .filter((email) => email !== String(candidateEmail));
+    }
+    
+    const updatedProject = await Project.findByIdAndUpdate(projectId, project, { new: true });
+    res.json(updatedProject);
+  };
