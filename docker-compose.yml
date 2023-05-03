@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  server:
+    image: pratyush02/pms_server
+    ports:
+     - '3001:3001'
+  client:
+    image: pratyush02/pms_client
+    ports:
+      - '3000:3000'
+    depends_on:
+      - server
+
