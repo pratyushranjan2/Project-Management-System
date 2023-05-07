@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import logger from "./logging.js";
 
 import projectRoutes from './routes/projects.js';
 import userRoutes from './routes/users.js'
@@ -21,6 +22,7 @@ const __dirname = dirname(__filename);
 
 app.get('/', (req, res) => {        
     //res.sendFile('index.html', {root: __dirname});     
+    logger.info('Transaction Home OK');
     res.status(200).send({message: "Welcome to Project Management System"}); 
 });
 
