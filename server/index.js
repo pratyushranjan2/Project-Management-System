@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 app.use('/projects', projectRoutes);
 app.use('/users', userRoutes);
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 
 await mongoose
   .connect(process.env.CONNECTION_URL)
