@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://pms-server-service:3001' });
+const API = axios.create({ baseURL: '' });
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {
