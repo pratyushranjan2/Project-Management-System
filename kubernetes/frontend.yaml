@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pms_client
+  labels:
+    app: pms_client
+spec:
+  selector:
+    matchLabels:
+      app: pms_client
+  template:
+    metadata:
+      labels:
+        app: pms_client
+    spec:
+      containers:
+        - name: recipe-frontend
+          image: pratyush02/pms_client
+          ports:
+            - containerPort: 3000
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pms_client-service
+
+spec:
+  type: LoadBalancer
+  selector:
+    app: pms_client
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+      # nodePort: 30000
