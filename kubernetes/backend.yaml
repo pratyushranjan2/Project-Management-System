@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pms_server
+  name: pms-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pms_server
+      app: pms-server
   template:
     metadata:
       labels:
-        app: pms_server
+        app: pms-server
     spec:
       containers:
-        - name: pms_server
+        - name: pms-server
           image: pratyush02/pms_server
           ports:
             - name: http
@@ -34,15 +34,15 @@ spec:
               secretKeyRef:
                 name: secret
                 key: jwt-secret
-                
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: pms_server-service
+  name: pms-server-service
 spec:
   selector:
-    app: pms_server
+    app: pms-server
   ports:
     - name: http
       protocol: TCP

@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pms_client
+  name: pms-client
   labels:
-    app: pms_client
+    app: pms-client
 spec:
   selector:
     matchLabels:
-      app: pms_client
+      app: pms-client
   template:
     metadata:
       labels:
-        app: pms_client
+        app: pms-client
     spec:
       containers:
         - name: recipe-frontend
@@ -23,12 +23,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pms_client-service
+  name: pms-client-service
 
 spec:
   type: LoadBalancer
   selector:
-    app: pms_client
+    app: pms-client
   ports:
     - name: http
       port: 3000

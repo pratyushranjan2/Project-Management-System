@@ -2,6 +2,7 @@
     "name": "client",
     "version": "0.1.0",
     "private": true,
+    "proxy": "http://pms_server-service:3001",
     "dependencies": {
         "@coreui/vue": "^4.8.1",
         "@headlessui/react": "^1.7.14",
