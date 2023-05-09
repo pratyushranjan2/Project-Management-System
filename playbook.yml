@@ -6,4 +6,4 @@
     - name: Docker Compose Up
       shell: |
         cd Project-Management-System
-        docker-compose up
+        docker-compose up -d
