@@ -1,0 +1,9 @@
+- name: Deployment
+  hosts: macos
+  tasks:
+    - name: Clone Project
+      shell: git clone -b client-local https://github.com/pratyushranjan2/Project-Management-System.git
+    - name: Docker Compose Up
+      shell: |
+        cd Project-Management-System
+        docker-compose up
