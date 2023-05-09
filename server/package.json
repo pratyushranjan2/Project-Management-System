@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --exit",
+    "test": "mocha --exit",
     "start": "node index.js"
   },
   "author": "",
