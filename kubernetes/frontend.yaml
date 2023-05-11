@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: recipe-frontend
-          image: pratyush02/pms_client
+          image: rizwans21/pms_client
           ports:
             - containerPort: 3000
 ---

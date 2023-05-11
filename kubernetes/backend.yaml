@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: pms-server
-          image: pratyush02/pms_server
+          image: rizwans21/pms_server
           ports:
             - name: http
               containerPort: 3001
