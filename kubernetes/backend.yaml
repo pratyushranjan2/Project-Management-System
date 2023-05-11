@@ -36,6 +36,7 @@ spec:
                 key: jwt-secret
 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
