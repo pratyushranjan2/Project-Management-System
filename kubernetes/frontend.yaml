@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pms-client
+  namespace: default
   labels:
     app: pms-client
 spec:
