@@ -24,9 +24,19 @@
     - name: Create Backend Deployment
       kubernetes.core.k8s:
         state: present
-        definition: "{{ lookup('file', './kubernetes/backend.yaml') | from_yaml }}"
+        definition: "{{ lookup('file', './kubernetes/backend-deployment.yaml') | from_yaml }}"
+
+    - name: Create Backend Service
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', './kubernetes/backend-service.yaml') | from_yaml }}"
 
     - name: Create Frontend Deployment
       kubernetes.core.k8s:
         state: present
-        definition: "{{ lookup('file', './kubernetes/frontend.yaml') | from_yaml }}" 
+        definition: "{{ lookup('file', './kubernetes/frontend-deployment.yaml') | from_yaml }}" 
+
+    - name: Create Frontend Service
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', './kubernetes/frontend-service.yaml') | from_yaml }}" 

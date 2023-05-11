@@ -34,20 +34,3 @@ spec:
               secretKeyRef:
                 name: secret
                 key: jwt-secret
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: pms-server-service
-  namespace: default
-spec:
-  selector:
-    app: pms-server
-  ports:
-    - name: http
-      protocol: TCP
-      port: 3001
-      targetPort: 3001
-      # nodePort: 30001
