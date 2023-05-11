@@ -31,6 +31,7 @@ app.use('/users', userRoutes);
 
 const PORT = process.env.PORT || 3001;
 
+// await database connection
 await mongoose
   .connect(process.env.CONNECTION_URL)
   .then(() =>
