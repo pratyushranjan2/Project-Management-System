@@ -2,6 +2,14 @@
 - name: Deploying with Kubernetes
   hosts: localhost
   tasks:
+
+    - name: install pre-requisites
+      pip:
+        name:
+          - openshift
+          - pyyaml
+          - kubernetes 
+
     - name: Apply Secrets
       kubernetes.core.k8s:
         state: present
